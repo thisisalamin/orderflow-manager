@@ -1,0 +1,34 @@
+# Ignore WordPress core files
+/wp-admin/
+/wp-includes/
+
+# Ignore WordPress content directories
+/wp-content/cache/
+/wp-content/upgrade/
+/wp-content/uploads/
+
+# Ignore plugin and theme files
+/wp-content/plugins/
+/wp-content/themes/
+
+# Ignore configuration files
+wp-config.php
+.htaccess
+
+# Ignore log files and databases
+*.log
+*.sql
+*.sqlite
+
+# Ignore OS generated files
+.DS_Store
+Thumbs.db
+
+# Ignore IDE and editor files
+.idea/
+.vscode/
+*.sublime-project
+*.sublime-workspace
+
+# Ignore node_modules
+node_modules/
