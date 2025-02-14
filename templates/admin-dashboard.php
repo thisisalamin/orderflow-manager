@@ -244,7 +244,7 @@ $total_pages = ceil((int)$total_orders_count / $per_page); // Fixed line: Explic
         <!-- Order Details Modal -->
         <div id="order-details-modal" class="fixed z-10 inset-0 overflow-y-auto hidden">
             <div class="flex items-center justify-center min-h-screen">
-                <div class="bg-white rounded-lg p-6 w-full max-w-2xl">
+                <div class="bg-gary-50 rounded-lg p-6 w-full max-w-2xl">
                     <form id="order-details-content" class="space-y-4">
                         <!-- Order details will be loaded here -->
                         <input type="hidden" name="order_id" id="order_id">
