@@ -32,7 +32,7 @@ jQuery(document).ready(function ($) {
             });
 
             $modalContent.html(`
-                <div id="invoice-content" class="bg-gray-50 p-6 rounded-md">
+                <div id="invoice-content" class="bg-white p-6 rounded-md">
                     <h2 class="text-2xl font-semibold text-gray-800 mb-6 border-b border-gray-300 pb-2">Order #${data.id}</h2>
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
                         <div>
