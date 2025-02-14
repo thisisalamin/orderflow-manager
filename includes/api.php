@@ -61,6 +61,17 @@ function get_order_details($data) {
         'shipping' => $order->get_shipping_total(),
         'payment_method' => $order->get_payment_method_title(),
         'customer_note' => $order->get_customer_note(),
+        'store' => array(
+            'name' => get_option('woocommerce_store_name', get_bloginfo('name')),
+            'address' => array(
+                'address_1' => get_option('woocommerce_store_address'),
+                'address_2' => get_option('woocommerce_store_address_2'),
+                'city' => get_option('woocommerce_store_city'),
+                'state' => get_option('woocommerce_store_state'),
+                'postcode' => get_option('woocommerce_store_postcode'),
+                'country' => get_option('woocommerce_default_country')
+            )
+        )
     );
 
     return rest_ensure_response($response);
