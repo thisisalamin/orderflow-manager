@@ -85,6 +85,8 @@ $total_pages = ceil((int)$total_orders_count / $per_page); // Fixed line: Explic
 
         <!-- Data Table -->
         <div class="overflow-x-auto">
+            <form method="get" action="">
+                <input type="hidden" name="page" value="<?php echo esc_attr($_GET['page'] ?? ''); ?>">
             <table class="min-w-full divide-y divide-gray-200">
                 <thead class="bg-gray-50">
                     <tr>
@@ -200,6 +202,7 @@ $total_pages = ceil((int)$total_orders_count / $per_page); // Fixed line: Explic
                 </tbody>
             </table>
         </div>
+        <hr class="my-6 border-gray-200">
         <!-- Start Pagination -->
         <div class="hidden sm:flex sm:flex-1 sm:items-center sm:justify-between">
             <div>
@@ -212,6 +215,16 @@ $total_pages = ceil((int)$total_orders_count / $per_page); // Fixed line: Explic
                     <span class="font-medium"><?php echo $total_orders_count; ?></span>
                     results
                 </p>
+            </div>
+            <div>
+                <div class="flex items-center space-x-2">
+                    <label for="per_page" class="block text-sm font-medium text-gray-700">Order Per Page</label>
+                    <select name="per_page" id="per_page" class="border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm" onchange="this.form.submit()">
+                        <?php foreach (array(10, 20, 50, 100) as $value) : ?>
+                            <option value="<?php echo esc_attr($value); ?>" <?php selected($per_page, $value); ?>><?php echo esc_html($value); ?></option>
+                        <?php endforeach; ?>
+                    </select>
+                </div>
             </div>
             <div>
                 <nav class="isolate inline-flex -space-x-px rounded-md shadow-xs" aria-label="Pagination">
@@ -240,7 +253,7 @@ $total_pages = ceil((int)$total_orders_count / $per_page); // Fixed line: Explic
             </div>
         </div>
         <!-- End Pagination -->
-
+        </form>
         <!-- Order Details Modal -->
         <div id="order-details-modal" class="fixed z-10 inset-0 overflow-y-auto hidden">
             <div class="flex items-center justify-center min-h-screen">
@@ -279,6 +292,7 @@ $total_pages = ceil((int)$total_orders_count / $per_page); // Fixed line: Explic
 <!-- Include flatpickr library -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+<script src="<?php echo plugin_dir_url(__FILE__) . '../order-details.js'; ?>"></script>
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         flatpickr("#date-range", {
