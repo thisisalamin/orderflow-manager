@@ -1,19 +1,22 @@
 <?php
 /**
  * Plugin Name: OrderFlow Manager for WooCommerce
- * Plugin URI:  https://yourwebsite.com/orderflow-manager-for-woocommerce
  * Description: Enhanced WooCommerce order management dashboard with advanced features.
- * Version:     1.0.0
- * Author:      Your Name
- * Author URI:  https://yourwebsite.com
+ * Version: 1.0.0
+ * Author: Crafely
+ * Author URI: https://crafely.com
  * Text Domain: orderflow-manager-for-woocommerce
  * Domain Path: /languages
+ * Requires at least: 5.8
+ * Requires PHP: 7.4
  * WC requires at least: 7.0
  * WC tested up to: 8.3
+ * License: GPL v2 or later
+ * License URI: https://www.gnu.org/licenses/gpl-2.0.html
  */
 
-if ( ! defined( 'ABSPATH' ) ) {
-	exit; // Exit if accessed directly.
+if (!defined('ABSPATH')) {
+    exit; // Exit if accessed directly
 }
 
 // Declare HPOS compatibility
