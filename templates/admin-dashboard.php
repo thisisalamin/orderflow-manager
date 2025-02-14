@@ -123,24 +123,37 @@ $total_pages = ceil((int)$total_orders_count / $per_page); // Fixed line: Explic
                     </tr>
                 </thead>
                 <tbody class="bg-white divide-y divide-gray-200">
-					<?php if ( $orders ) : ?>
-						<?php foreach ( $orders as $order ) : ?>
+                    <?php if ( $orders ) : ?>
+                        <?php foreach ( $orders as $order ) : ?>
+                            <?php 
+                            // Skip if order is not a valid order object
+                            if (!is_a($order, 'WC_Order')) {
+                                continue;
+                            }
+                            ?>
                             <tr>
                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-									<?php echo esc_html( $order->get_order_number() ); ?>
+                                    <?php 
+                                    // Safely get order number
+                                    $order_number = method_exists($order, 'get_order_number') ? $order->get_order_number() : $order->get_id();
+                                    echo esc_html($order_number);
+                                    ?>
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-									<?php if ( $order->get_billing_first_name() || $order->get_billing_last_name() ) : ?>
-										<?php echo esc_html( $order->get_billing_first_name() . ' ' . $order->get_billing_last_name() ); ?>
-									<?php else : ?>
-										<?php esc_html_e( 'Guest', 'orderflow-manager-for-woocommerce' ); ?>
-									<?php endif; ?>
+                                    <?php 
+                                    $first_name = $order->get_billing_first_name();
+                                    $last_name = $order->get_billing_last_name();
+                                    if (!empty($first_name) || !empty($last_name)) : ?>
+                                        <?php echo esc_html(trim($first_name . ' ' . $last_name)); ?>
+                                    <?php else : ?>
+                                        <?php esc_html_e('Guest', 'orderflow-manager-for-woocommerce'); ?>
+                                    <?php endif; ?>
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-									<?php echo wp_kses_post( $order->get_formatted_order_total() ); ?>
+                                    <?php echo wp_kses_post( $order->get_formatted_order_total() ); ?>
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-									<?php echo esc_html( wc_format_datetime( $order->get_date_created() ) ); ?>
+                                    <?php echo esc_html( wc_format_datetime( $order->get_date_created() ) ); ?>
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap text-sm">
                                     <div class="order-status-wrapper" data-order-id="<?php echo esc_attr( $order->get_id() ); ?>">
@@ -176,14 +189,14 @@ $total_pages = ceil((int)$total_orders_count / $per_page); // Fixed line: Explic
                                     <a href="#" data-order-id="<?php echo esc_attr( $order->get_id() ); ?>" class="text-blue-500 hover:text-blue-700 view-order-link">View Order</a>
                                 </td>
                             </tr>
-						<?php endforeach; ?>
-					<?php else : ?>
+                        <?php endforeach; ?>
+                    <?php else : ?>
                         <tr>
                             <td colspan="6" class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 text-center">
-								<?php esc_html_e( 'No orders found.', 'orderflow-manager-for-woocommerce' ); ?>
+                                <?php esc_html_e( 'No orders found.', 'orderflow-manager-for-woocommerce' ); ?>
                             </td>
                         </tr>
-					<?php endif; ?>
+                    <?php endif; ?>
                 </tbody>
             </table>
         </div>
